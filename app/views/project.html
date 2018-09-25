@@ -1,0 +1,65 @@
+{% extends './partials/default.html' %}
+{% block body %}
+
+<div class="wrapper">
+    {% include './partials/header.html' %}
+
+    <section id="main">
+      <div class="container">
+        <header>
+          <h2>{{ project.title }}</h2>
+          <div class="addon">
+            <a href="/projects/del/{{ project.id }}" class="btn btn-danger">Excluir projeto</a>
+          </div>
+        </header>
+
+        <section id="content">
+          <nav>
+
+            <form>
+              <button type="submit" class="btn" id="newsec" data-modal-open="#newsec-div">NOVA SEÇÃO</button>
+            </form>
+
+            <div class="sessions">
+            {% if sections.length == 0 %}
+              <h1>Não há seções para mostrar</h1><br>
+            {% endif %}
+            {% for section in sections %}
+              <a class="active" href="/sections/{{ project.id }}/get/{{ section.id }}">{{ section.title }}</a>
+            {% endfor %}
+            </div>
+
+          </nav>
+
+          <article>
+            {% if section %}
+              <div class="project-header">
+                <h1>{{ section.title }}</h1>
+                <a href="/sections/{{ project.id }}/del/{{ section.id }}">Excluir seção</a>
+              </div>
+              <p>{{ section.formattedContent | safe }}</p>
+            {% else %}
+              <p>Escolha uma seção no menu lateral ou crie uma nova no botão "NOVA SEÇÃO"</p>
+            {% endif %}
+          </article>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal" id="newsec-div">
+          <form action="/sections/{{ project.id }}/add" method="POST" class="modal-content">
+            <input type="text" name="title" placeholder="Título da seção" />
+
+            <div class="content-container">
+              <textarea name="content" placeholder="Conteúdo da seção" class="mde"></textarea>
+            </div>
+
+            <button type="submit">CRIAR SEÇÃO</button>
+            <a href="#" data-modal-close="#newsec-div">CANCELAR</a>
+          </form>
+        </div>
+        <!-- /Modal -->
+
+      </div>
+    </section>
+  </div>
+{% endblock %}

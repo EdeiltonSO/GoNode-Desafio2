@@ -1,0 +1,33 @@
+{
+  "name": "GN-M2-Desafio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e js,json,njk,html,css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "connect-session-sequelize": "^5.2.2",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "highlight.js": "^9.12.0",
+    "markdown-it": "^8.4.2",
+    "mysql2": "^1.6.1",
+    "nodemon": "^1.0.6",
+    "nunjucks": "^3.1.3",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
