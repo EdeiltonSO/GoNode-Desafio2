@@ -28,22 +28,21 @@ routes.post('/authenticate', logController.authenticate);
 
 // ÁREA INTERNA ///////////////////////////
 // Dashboard
+routes.get('/app', dashboardController.index);
 routes.get('/app/dashboard', dashboardController.index);
 
 // Project
-routes.post('/projects/add', projectController.add);
-routes.get('/projects/get/:projectId', projectController.show);
-routes.get('/projects/del/:projectId', projectController.remove);
+routes.post('/app/projects/add', projectController.add);
+routes.get('/app/projects/:projectId/get', projectController.show);
+routes.get('/app/projects/:projectId/del', projectController.remove);
 
 // Section
-routes.post('/sections/:projectId/add', sectionController.add);
-routes.get('/sections/:projectId/get/:sectionId', sectionController.show);
-routes.get('/sections/:projectId/del/:sectionId', sectionController.remove);
+routes.post('/app/projects/:projectId/sections/add', sectionController.add);
+routes.get('/app/projects/:projectId/sections/:sectionId/get', sectionController.show);
+routes.get('/app/projects/:projectId/sections/:sectionId/del', sectionController.remove);
+routes.post('/app/projects/:projectId/sections/:sectionId/update', sectionController.update);
 
 // ERROR 404
-routes.use((req, res) => {
-  console.log('>>> ERROR 404');
-  res.render('error404');
-});
+routes.use((req, res) => res.render('error404'));
 
 module.exports = routes;

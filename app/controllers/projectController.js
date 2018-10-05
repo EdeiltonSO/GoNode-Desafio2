@@ -12,34 +12,39 @@ module.exports = {
 
       return res.render('project', { project, name, sections });
     } catch (error) {
-      return console.log(`>>> ${error}`);
+      console.log(`>>> ERRO: ${error}`);
+      return res.render('error');
     }
   },
   async add(req, res) {
     try {
       const { name } = req.body;
-      if (name) {
-        const project = await Project.create({
-          title: name,
-          UserId: req.session.user.id,
-        });
-        req.flash('success', 'Projeto criado com sucesso!');
-        res.redirect(`/projects/get/${project.id}`);
-      } else {
+
+      if (!name) {
         req.flash('error', 'Qual o nome do projeto?');
-        res.redirect('/');
+        return req.session.save(() => res.redirect('/app/dashboard'));
       }
+
+      const project = await Project.create({
+        title: name,
+        UserId: req.session.user.id,
+      });
+      req.flash('success', 'O projeto foi criado com sucesso!');
+      return req.session.save(() => res.redirect(`/app/projects/${project.id}/get`));
     } catch (error) {
-      console.log(`>>> ${error}`);
+      console.log(`>>> ERRO: ${error}`);
+      return res.render('error');
     }
   },
   async remove(req, res) {
     try {
       await Project.destroy({ where: { id: req.params.projectId } });
-      req.flash('success', 'Projeto deletado');
-      return res.redirect('/app/dashboard');
+      req.flash('success', 'O projeto foi deletado com sucesso!');
+
+      return req.session.save(() => res.redirect('/app/dashboard'));
     } catch (error) {
-      return console.log(`>>> ${error}`);
+      console.log(`>>> ERRO: ${error}`);
+      return res.render('error');
     }
   },
 };

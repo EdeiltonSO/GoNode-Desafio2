@@ -42,5 +42,3 @@ $(document).ready(() => {
     }
   });
 });
-
-// Marcando seção como ativa

@@ -11,7 +11,8 @@ module.exports = {
 
       return res.render('dashboard', { name, projects });
     } catch (error) {
-      return console.log(`>>> ${error}`);
+      console.log(`>>> ERRO: ${error}`);
+      return res.render('error');
     }
   },
 };

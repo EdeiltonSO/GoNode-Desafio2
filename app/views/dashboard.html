@@ -8,7 +8,7 @@
         <header>
           <h2>Meus projetos ({{ projects.length }})</h2>
           <div class="addon">
-            <form action="/projects/add" method="post">
+            <form action="/app/projects/add" method="post">
               <input type="text" name="name" placeholder="Novo projeto">
               <button type="submit" class="btn">
                 <img src="/img/plus.svg">
@@ -23,7 +23,7 @@
             <h1>Não há projetos para serem exibidos</h1>
           {% endif %}
           {% for project in projects %}
-            <a href="/projects/get/{{ project.id }}">{{ project.title }}</a>
+            <a href="/app/projects/{{ project.id }}/get">{{ project.title }}</a>
           {% endfor %}
           </div>
         </section>
